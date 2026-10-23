@@ -1,0 +1,55 @@
+function Rectangulo(width, height) {
+  this.width = (width > 0) ? width : 1;
+  this.height = (height > 0) ? height : 1;
+}
+
+Rectangulo.prototype.cambiarDimensiones = function(width, height) {
+  this.width = (width > 0) ? width : 1;
+  this.height = (height > 0) ? height : 1;
+};
+
+Rectangulo.prototype.calcularArea = function() {
+  return this.width * this.height;
+};
+
+Rectangulo.prototype.copia = function() {
+  return new Rectangulo(this.width, this.height);
+};
+
+Rectangulo.prototype.comparar = function(otroRectangulo) {
+  let areaActual = this.calcularArea();
+  let areaOtro = otroRectangulo.calcularArea();
+
+  if (areaActual > areaOtro) {
+    return "mayor";
+  } else if (areaActual < areaOtro) {
+    return "menor";
+  } else {
+    return "igual";
+  }
+};
+
+let contenedor1 = document.createElement("div");
+contenedor1.style.fontFamily = "Arial, sans-serif";
+contenedor1.style.padding = "10px";
+
+let rect1 = new Rectangulo(5, 10);
+let rect2 = new Rectangulo(-2, 0);
+let rect3 = rect1.copia();
+
+rect3.cambiarDimensiones(3, 3);
+
+let resultados1 = [
+  "Area Rectangulo 1 (5x10): " + rect1.calcularArea(),
+  "Area Rectangulo 2 (por defecto 1x1): " + rect2.calcularArea(),
+  "Comparacion Rectangulos (3x3): " + rect1.comparar(rect3),
+  "Copia de Rectangulo 1 - Area: " + rect3.calcularArea()
+];
+
+resultados1.forEach(function(texto) {
+  let p = document.createElement("p");
+  p.textContent = texto;
+  contenedor1.appendChild(p);
+});
+
+document.body.appendChild(contenedor1);
